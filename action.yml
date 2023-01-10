@@ -50,8 +50,8 @@ runs:
     - name: Build the project
       shell: bash
       run: |
-        rm -rf ${{ build-dir }}
-        mkdir -p ${{ build-dir }} 
-        cp ${{ inputs.entry-html }} ${{ build-dir }}/ 
-        spago bundle-app --to ${{ build-dir }}/index.js 
-        parcel build ${{ build-dir }}/index.html
+        rm -rf ${{ inputs.build-dir }}
+        mkdir -p ${{ inputs.build-dir }} 
+        cp ${{ inputs.entry-html }} ${{ inputs.build-dir }}/ 
+        spago bundle-app --to ${{ inputs.build-dir }}/index.js 
+        parcel build ${{ inputs.build-dir }}/index.html
