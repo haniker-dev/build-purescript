@@ -9,10 +9,10 @@ inputs:
     description: "Target directory for build. Default `dist`."
     required: false
     default: "dist"
-  entry-html:
-    description: "Entry HTML file. Default `public/index.html`"
+  public-dir:
+    description: "Public directory. Action will copy all folders/files in this directory to build-dir. Default `public`"
     required: false
-    default: "public/index.html"
+    default: "public"
 runs:
   using: composite
   steps:
@@ -51,7 +51,6 @@ runs:
       shell: bash
       run: |
         rm -rf ${{ inputs.build-dir }}
-        mkdir -p ${{ inputs.build-dir }} 
-        cp ${{ inputs.entry-html }} ${{ inputs.build-dir }}/ 
+        cp -r ${{ inputs.public-dir }} ${{ inputs.build-dir }}
         spago bundle-app --to ${{ inputs.build-dir }}/index.js 
         parcel build ${{ inputs.build-dir }}/index.html
